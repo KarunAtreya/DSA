@@ -157,4 +157,104 @@ Time Complexity: O(n), where n is the length of the prices array. We make only a
 Space Complexity: O(1), since we use only two variables: min_price and max_profit.
 
 
-## 6. 
+## 6. Longest common prefix
+
+### Problem statement
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+The “Longest Common Prefix” problem is a classic string processing task that asks you to find the longest starting substring that is shared among all strings in a given array. In simpler terms, given an array of strings, you are asked to return the common portion that all strings begin with. For example, given ["flower", "flow", "flight"], the longest common prefix is "fl", because it is the shared start of all the strings. If no common prefix exists, the correct result is an empty string "".
+
+### Solution
+
+        def longestCommonPrefix(self, strs: List[str]) -> str:
+        min_length = float(inf)
+        for s in strs:
+            if len(s) < min_length:
+                min_length = len(s)
+        i = 0
+        while i < min_length:
+            for s in strs:
+                if s[i] != strs[0][i]:
+                    return s[:i]
+            i = i+1
+        return s[:i]
+
+### Time and Space Complexity
+
+Time complexity = O(n*m) n is number of string in the list and m is the minimum length of string 
+Space complexity = O(1)
+
+## 7. Summary ranges
+
+### Problem Statement
+The “Summary Ranges” problem asks us to process a sorted array of unique integers and return a compact list of string representations of all consecutive ranges. Each range should be expressed in the form "a->b" if a sequence exists, or just "a" if it stands alone.
+
+For example, given the input [0, 1, 2, 4, 5, 7], the output should be ["0->2", "4->5", "7"]. This output represents three distinct segments of consecutive numbers compacted into human-readable strings.
+
+### Solution
+
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        ans = []
+        i = 0
+        
+        while i < len(nums):
+            start = nums[i]
+
+            while i < len(nums)-1 and nums[i]+1 == nums[i+1]:
+                i = i +1
+            
+            if start==nums[i]:
+                ans.append(str(nums[i]))
+            else:
+                ans.append(str(start)+"->"+str(nums[i]))
+            i = i + 1
+        return ans
+
+### Time and Space Complexity
+time = O(n)
+spave O(1)
+
+## 8. Product of array except itself
+
+### Problem Statement
+
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+
+
+### Solution
+
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+            n = len(nums)
+            l_mult = 1
+            r_mult = 1
+
+            l_arr = [0] * n
+            r_arr = [0] * n
+            print (l_arr)
+
+            for i in range(n):
+                j = -i-1
+                l_arr[i] = l_mult
+                r_arr[j] = r_mult
+                l_mult *= nums[i]
+                r_mult *= nums[j]
+
+            return [l*r for l, r in zip(l_arr, r_arr)]     
+
+### Time and space complexity
+Time = 0(n)
+Space = 0(n)
