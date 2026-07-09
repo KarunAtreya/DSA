@@ -42,24 +42,24 @@ You are given two strings, word1 and word2. The task is to create a new string b
 
 ### Solution
 
-def mergeAlternately(self, word1: str, word2: str) -> str:
-        A, B = len(word1), len(word2)
-        counter = 0
-        string_list = []
-        
-        while counter < A and counter < B:
-            string_list.append(word1[counter])
-            string_list.append(word2[counter])
-            counter+=1
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+            A, B = len(word1), len(word2)
+            counter = 0
+            string_list = []
+            
+            while counter < A and counter < B:
+                string_list.append(word1[counter])
+                string_list.append(word2[counter])
+                counter+=1
 
-        while counter < A:
-            string_list.append(word1[counter])
-            counter+=1
+            while counter < A:
+                string_list.append(word1[counter])
+                counter+=1
 
-        while counter < B:
-            string_list.append(word2[counter])
-            counter+=1
-        return ''.join(string_list)
+            while counter < B:
+                string_list.append(word2[counter])
+                counter+=1
+            return ''.join(string_list)
 
 ### Time and Space Complexity
 
@@ -78,20 +78,20 @@ However, Roman numerals also allow for a subtractive notation. This occurs when 
 
 ### Solution
 
-def romanToInt(self, s: str) -> int:
-        d = {'I': 1, 'V':5, 'X':10, 'L':50, 'C':100, 'D': 500, 'M':1000}
-        summ = 0
-        n = len(s)
-        i = 0
+    def romanToInt(self, s: str) -> int:
+            d = {'I': 1, 'V':5, 'X':10, 'L':50, 'C':100, 'D': 500, 'M':1000}
+            summ = 0
+            n = len(s)
+            i = 0
 
-        while i < n:
-            if i < n-1 and d[s[i]] < d[s[i+1]]:
-                summ += d[s[i+1]] - d[s[i]]
-                i+=2
-            else:
-                summ += d[s[i]]
-                i+=1
-        return summ
+            while i < n:
+                if i < n-1 and d[s[i]] < d[s[i+1]]:
+                    summ += d[s[i+1]] - d[s[i]]
+                    i+=2
+                else:
+                    summ += d[s[i]]
+                    i+=1
+            return summ
 
 
 ### Space and Time Complexity
@@ -125,3 +125,36 @@ def isSubsequence(self, s: str, t: str) -> bool:
 
 ### Time and Space Complexity
 This algorithm runs in O(n) time, where n is the length of t. We only scan through each character of t once. The space complexity is O(1) since we don’t use any additional data structures beyond a few variables.
+
+
+## 5. Best Time to Buy and Sell Stock
+
+### Problem Overview
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+### Solution
+
+if done using brute force approach the time complexity is O(n^2)
+we can solve this problem using greedy approach by scanning the sequence in one pass tracking the minimum price
+
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit = 0
+        min_price = prices[0]
+        for price in prices:
+            if price < min_price:
+                min_price = price
+            profit = price - min_price
+            if profit > max_profit:
+                max_profit = profit
+        return max_profit
+
+### Time and Space Complexity
+Time Complexity: O(n), where n is the length of the prices array. We make only a single pass through the array.
+Space Complexity: O(1), since we use only two variables: min_price and max_profit.
+
+
+## 6. 
